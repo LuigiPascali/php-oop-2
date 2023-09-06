@@ -1,6 +1,9 @@
 <?php
 
     require_once __DIR__ . '/models/Shop.php';
+    require_once __DIR__ . '/models/Customer.php';
+    require_once __DIR__ . '/models/Order.php';
+    require_once 'CreditCard.php';
 
     $dogCategory = new Category('Dog');
     $catCategory = new Category('Cat');
@@ -15,10 +18,24 @@
         $catCategory->addProduct($product);
     }
 
-
     $shop = new Shop();
     $shop->addCategory($dogCategory);
     $shop->addCategory($catCategory);
+
+    $customer = new Customer('Tizio Incognito', '123 Sesame Street', 'password');
+
+    $creditCard = new CreditCard('1234567812345678', 'Tizio Incognito', '12/24'); 
+
+    $order = new Order($dogCategory->products, 100, $customer);
+
+    try {
+        
+        $order->processPayment($creditCard);
+    } catch (CreditCardExpiredException $e) {
+        
+        echo $e->getMessage();
+    }
+
 
 ?>
 
@@ -37,6 +54,40 @@
 </head>
 
 <body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+        <div class="container">
+
+            <a class="navbar-brand" href="#">Pet Shop</a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+
+                <ul class="navbar-nav ml-auto">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Home</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Products</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </nav>
 
     <div class="container">
 

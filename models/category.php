@@ -1,21 +1,21 @@
 <?php
 
-class Category
-{
-    public $name;
-    public $products;
-
-    public function __construct($name)
+    class Category
     {
-        $this->name = $name;
+        public $name;
+        public $products;
 
-        $this->products = array();
-    }
+        public function __construct($name)
+        {
+            $this->name = $name;
 
-    public function addProduct($product)
-    {  
-        $this->products[] = $product;
+            $this->products = array();
+        }
+
+        public function addProduct($product)
+        {  
+            $this->products[] = $product;
+        }
     }
-}
 
 ?>
